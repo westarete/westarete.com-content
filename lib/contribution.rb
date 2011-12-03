@@ -1,5 +1,6 @@
 require 'active_model'
 require 'markdown_formatter'
+require 'id_creator'
 
 class Contribution
   attr_accessor :name, :site_url, :description
@@ -10,4 +11,8 @@ class Contribution
   include MarkdownFormatter
   extend MarkdownFormatter::ClassMethods
   markdown_support_for :description
+
+  include IdCreator
+  extend IdCreator::ClassMethods
+  create_id_from :name
 end
