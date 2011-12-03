@@ -48,6 +48,6 @@ class Id
   end
 
   def strip_join_characters
-    @id.gsub!(/^#{JOIN_CHARACTER}+/, '').gsub!(/#{JOIN_CHARACTER}+$/, '')
+    @id = @id.gsub(/^#{JOIN_CHARACTER}+/, '').gsub(/#{JOIN_CHARACTER}+$/, '')
   end
 end
