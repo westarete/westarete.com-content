@@ -4,8 +4,8 @@
 echo '========== Set Up RVM ==============================================='
 export PATH=$PATH:~/.rvm/bin
 source ~/.rvm/scripts/rvm
+source .rvmrc
 set -e # Exit on any error
-cd .   # Kick off the rvmrc
 set -x # Echo each command
 
 echo '========== Verify Environment ======================================='
