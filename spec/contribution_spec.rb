@@ -17,8 +17,5 @@ describe "An instance of Contribution" do
   it { should validate_presence_of :description }
   it { should have_markdown_support_for :description }
 
-  it 'should define an id based on its name' do
-    subject.name = ' Contribution  Name!'
-    subject.id.should == 'contribution-name'
-  end
+  it { should have_an_id_based_on(:name) }
 end

@@ -13,3 +13,15 @@ RSpec::Matchers.define :have_markdown_support_for do |attribute_name|
     object.send(attribute_name).strip == '<p>This is in <em>markdown</em> format.</p>'
   end
 end
+
+RSpec::Matchers.define :have_an_id_based_on do |*attribute_names|
+  match do |object|
+    expected_values = []
+    attribute_names.each_with_index do |attribute_name, i|
+      value = "value#{i}"
+      object.send("#{attribute_name}=", value)
+      expected_values << value
+    end
+    object.id == expected_values.join("-")
+  end
+end

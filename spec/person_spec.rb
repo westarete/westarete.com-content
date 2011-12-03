@@ -16,8 +16,5 @@ describe 'An instance of Person' do
   it { should validate_presence_of :description }
   it { should have_markdown_support_for :description }
 
-  it 'should define an id based on its name' do
-    subject.name = ' John  Smith!!'
-    subject.id.should == 'john-smith'
-  end
+  it { should have_an_id_based_on(:name) }
 end
