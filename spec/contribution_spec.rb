@@ -1,14 +1,7 @@
 require 'spec_helper'
 
 describe Contribution do
-  before do
-    @contribution = Contribution.new
-  end
-  it 'has a name' do
-    @contribution.should respond_to(:name)
-  end
-  it 'can assign the name' do
-    @contribution.name = 'bob'
-    @contribution.name.should == 'bob'
-  end
+  it { should have_an_attribute :name }
+  it { should have_an_attribute :site_url }
+  it { should have_an_attribute :description }
 end
