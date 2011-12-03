@@ -1,3 +1,4 @@
+require 'uri'
 require 'active_model'
 require 'markdown_formatter'
 require 'id_creator'
