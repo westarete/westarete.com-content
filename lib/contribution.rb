@@ -7,6 +7,7 @@ class Contribution
 
   include ActiveModel::Validations
   validates_presence_of :name, :site_url, :description
+  validates_format_of :site_url, :with => URI.regexp
 
   include MarkdownFormatter
   extend MarkdownFormatter::ClassMethods
