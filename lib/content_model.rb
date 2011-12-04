@@ -20,4 +20,15 @@ class ContentModel
     required_attributes(attribute_name)
   end
 
+  def self.all
+    @instances ||= []
+  end
+
+  def self.count
+    all.length
+  end
+
+  def save
+    self.class.all << self
+  end
 end

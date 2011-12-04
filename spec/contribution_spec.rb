@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe "An instance of Contribution" do
-  subject { Contribution.new }
+describe Contribution do
+  it_behaves_like 'a ContentModel'
 
   it { should have_an_attribute :name }
   it { should validate_presence_of :name }

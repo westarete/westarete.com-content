@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'An instance of Person' do
-  subject { Person.new }
+describe Person do
+  it_behaves_like 'a ContentModel'
 
   it { should have_an_attribute :name }
   it { should validate_presence_of :name }
