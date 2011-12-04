@@ -11,6 +11,19 @@ shared_examples "a ContentModel" do
       it { should == 3 }
     end
   end
+  describe '.create' do
+    it 'should return a new object' do
+      described_class.create.should be_an_instance_of described_class
+    end
+    it 'should yield the new object as a block variable' do
+      described_class.create do |o|
+        o.should be_an_instance_of described_class
+      end
+    end
+    it 'should save the object' do
+      expect { described_class.create }.to change { described_class.count }.by(1)
+    end
+  end
   describe '#save' do
     let(:object) { described_class.new }
     it 'should increase the total count by 1' do

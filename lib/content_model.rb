@@ -28,6 +28,13 @@ class ContentModel
     all.length
   end
 
+  def self.create
+    object = self.new
+    yield object if block_given?
+    object.save
+    object
+  end
+
   def save
     self.class.all << self
   end
