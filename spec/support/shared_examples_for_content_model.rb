@@ -1,4 +1,17 @@
 shared_examples "a ContentModel" do
+  after do
+    described_class.all.clear
+  end
+  describe '.all' do
+    before do
+      @object1 = described_class.create
+      @object2 = described_class.create
+      @object3 = described_class.create
+    end
+    it 'should return the objects in the order they were created' do
+      described_class.all.should == [@object1, @object2, @object3]
+    end
+  end
   describe '.count' do
     subject { described_class.count }
     context 'when there are no instances' do
