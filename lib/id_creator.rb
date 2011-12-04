@@ -21,10 +21,7 @@ class Id
   JOIN_CHARACTER = '-'
 
   def initialize(*values)
-    @values = values
-    escape_attribute_values
-    join_attribute_values
-    strip_join_characters
+    @id = strip(join(escape(values)))
   end
 
   def to_s
@@ -33,21 +30,23 @@ class Id
 
   private
 
-  def escape_attribute_values
-    @values.map! do |value|
-      value.downcase.gsub(disallowed_characters, JOIN_CHARACTER)
-    end
+  def escape(values)
+    values.map { |v| escape_one_value(v) }
+  end
+
+  def escape_one_value(value)
+    value.downcase.gsub(disallowed_characters, JOIN_CHARACTER)
   end
 
   def disallowed_characters
     /[^a-z0-9]+/i
   end
 
-  def join_attribute_values
-    @id = @values.join(JOIN_CHARACTER)
+  def join(values)
+    values.join(JOIN_CHARACTER)
   end
 
-  def strip_join_characters
-    @id = @id.gsub(/^#{JOIN_CHARACTER}+/, '').gsub(/#{JOIN_CHARACTER}+$/, '')
+  def strip(string)
+    string.gsub(/^#{JOIN_CHARACTER}+/, '').gsub(/#{JOIN_CHARACTER}+$/, '')
   end
 end
