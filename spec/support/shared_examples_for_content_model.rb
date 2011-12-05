@@ -52,6 +52,24 @@ shared_examples "a ContentModel" do
       end
     end
   end
+  describe '.find_all' do
+    let(:result) { described_class.find_all(:name, 'John') }
+    context 'when there are objects that match' do
+      let!(:matching_object) do
+        described_class.create do |p|
+          p.name = 'John'
+        end
+      end
+      it 'should return an array of those objects' do
+        result.should == [matching_object]
+      end
+    end
+    context 'when there are no objects that match' do
+      it 'should return an empty array' do
+        result.should be_empty
+      end
+    end
+  end
   describe '#save' do
     let(:object) { described_class.new }
     it 'should increase the total count by 1' do

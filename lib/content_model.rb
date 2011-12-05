@@ -43,6 +43,10 @@ class ContentModel
         "Couldn't find a #{self.class} where #{attribute_name} is \"#{value_to_match}\""
   end
 
+  def self.find_all(attribute_name, value_to_match)
+    all.select { |o| o.send(attribute_name) == value_to_match }
+  end
+
   def save
     self.class.all << self
   end
