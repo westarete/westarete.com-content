@@ -34,6 +34,24 @@ shared_examples "a ContentModel" do
       expect { described_class.create }.to change { described_class.count }.by(1)
     end
   end
+  describe '.find' do
+    let(:result) { described_class.find(:name, 'John') }
+    context 'when there is a match' do
+      let!(:matching_object) do
+        described_class.create do |p|
+          p.name = 'John'
+        end
+      end
+      it 'should return that object' do
+        result.should be(matching_object)
+      end
+    end
+    context 'when there is no match' do
+      it 'should raise a NotFoundError' do
+        expect { result }.to raise_error(NotFoundError)
+      end
+    end
+  end
   describe '#save' do
     let(:object) { described_class.new }
     it 'should increase the total count by 1' do

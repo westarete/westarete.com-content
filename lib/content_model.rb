@@ -2,6 +2,8 @@ require 'active_model'
 require 'markdown_formatter'
 require 'id_creator'
 
+class NotFoundError < Exception ; end
+
 class ContentModel
   include ActiveModel::Validations
 
@@ -33,6 +35,12 @@ class ContentModel
     yield object if block_given?
     object.save
     object
+  end
+
+  def self.find(attribute_name, value_to_match)
+    all.detect { |o| o.send(attribute_name) == value_to_match } or
+      raise NotFoundError,
+        "Couldn't find a #{self.class} where #{attribute_name} is \"#{value_to_match}\""
   end
 
   def save
