@@ -9,7 +9,7 @@ require 'shoulda/matchers/integrations/rspec'
 
 RSpec.configure do |config|
   config.before(:each) do
-    [Contribution, Person, Project, Service].each do |model|
+    [Contribution, Person, Project, ProjectCategory, Service].each do |model|
       model.all.clear
     end
   end

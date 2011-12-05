@@ -7,6 +7,9 @@ describe Project do
   it { should validate_presence_of :name }
   it { should have_an_id_based_on(:name) }
 
+  it { should have_an_attribute :category_name }
+  it { should validate_presence_of :category_name }
+
   it { should have_an_attribute :site_url }
   it { should validate_presence_of :site_url }
   it 'should validate the format of site_url' do
