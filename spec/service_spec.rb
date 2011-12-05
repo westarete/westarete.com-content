@@ -11,4 +11,33 @@ describe Service do
   it { should validate_presence_of :description }
   it { should have_markdown_support_for :description }
 
+  it { should have_an_attribute :name_of_featured_project }
+  it { should validate_presence_of :name_of_featured_project }
+
+  describe '#featured_project' do
+    let(:project) do
+      Project.create do |p|
+        p.name = 'athletictravel.com'
+      end
+    end
+    let(:service) { Service.new }
+    let(:result) { service.featured_project }
+    context 'when a valid project name has been assigned' do
+      before { service.name_of_featured_project = project.name }
+      it 'should return the matching project object' do
+        result.should be(project)
+      end
+    end
+    context 'when an unknown project name has been assigned' do
+      before { service.name_of_featured_project = 'something else' }
+      it 'should raise a NotFoundError' do
+        expect { result }.to raise_error NotFoundError
+      end
+    end
+    context 'when no project name has been assigned' do
+      it 'should raise a NotFoundError' do
+        expect { result }.to raise_error NotFoundError
+      end
+    end
+  end
 end
