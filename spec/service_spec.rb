@@ -7,6 +7,9 @@ describe Service do
   it { should validate_presence_of :name }
   it { should have_an_id_based_on(:name) }
 
+  it { should have_an_attribute :short_name }
+  it { should validate_presence_of :short_name }
+
   it { should have_an_attribute :description }
   it { should validate_presence_of :description }
   it { should have_markdown_support_for :description }
