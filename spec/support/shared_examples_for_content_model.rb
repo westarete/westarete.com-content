@@ -1,7 +1,4 @@
 shared_examples "a ContentModel" do
-  after do
-    described_class.all.clear
-  end
   describe '.all' do
     before do
       @object1 = described_class.create
